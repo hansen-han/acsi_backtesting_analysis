@@ -3,7 +3,7 @@ This repository contains a Python script and a Jupyter notebook used to explore 
 
 The script implements two trading strategies for each sector: a high satisfaction strategy, where at the beginning of each year, the strategy buys the stock in the sector with the highest consumer satisfaction score from the previous year, and a low satisfaction strategy, where at the beginning of each year, the strategy buys the stock in the sector with the lowest consumer satisfaction score. For each strategy in each sector, the script calculates various performance metrics, including overall returns over the 7-year period, annualized return, maximum drawdown, alpha, beta, and a Sharpe ratio.
 
-The results are presented in a table that shows the performance of the two strategies for each sector, as well as the S&P 500 (buy and hold) returns over the same period (see example:).
+The results are presented in a table that shows the performance of the two strategies for each sector, as well as the S&P 500 (buy and hold) returns over the same period. 
 
 
 ![plot](airline_returns.png)
