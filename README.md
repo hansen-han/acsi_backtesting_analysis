@@ -38,9 +38,6 @@ The script will load the ASCI data from the  ```ASCI_Scores.csv``` file, compute
 
 
 ## Results
-The following provides information on the 7-year return on investment for various sectors, categorized by high and low customer satisfaction scores, along with the S&P 500 index return over the same period. Sectors with high customer satisfaction scores tended to have higher returns compared to sectors with low customer satisfaction scores. For instance, the sectors with the highest customer satisfaction scores, such as Health and Personal Care Stores, Athletic Shoes, and Internet Retail, had returns that were significantly higher than the S&P 500 index return. On the other hand, sectors with low customer satisfaction scores, such as Specialty Retail Stores, and Soft Drinks had returns that were either lower or only marginally higher than the S&P 500 index return. This suggests that customer satisfaction is a relevant factor in investment decisions and can be an indicator of a company's long-term financial performance.
-
-
 | Sector | High Satisfaction (HS) 7-Year Return |  Low Satisfaction (LS) 7-Year Return |  S&P 500 (Buy & Hold) 7-Year Return | 
 | :---:  | :---: | :---: | :---: |  
 | Airlines | 319.01%   | 424.79%   | 192.21%   |
