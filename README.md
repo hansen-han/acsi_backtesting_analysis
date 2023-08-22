@@ -12,18 +12,18 @@ Data Source: Hourly data for the past two years obtained using the yfinance libr
 - SMA Crossover w/ Shorting
 - SMA Crossover w/o Shorting
   
-** Key Insights** : SMA Crossover strategies generally outperformed Mean Reversion strategies, with SMA Crossover w/ Shorting beating the S&P 500 buy and hold in over 50% of the test runs.
+**Key Insights** : SMA Crossover strategies generally outperformed Mean Reversion strategies, with SMA Crossover w/ Shorting beating the S&P 500 buy and hold in over 50% of the test runs.
 Detailed Analysis & Code
 
 ### 2. Bitcoin
 A deep dive into trend following and mean reversion strategies to understand their effectiveness in trading Bitcoin.
 
-** Data Source**: 1-minute Bitcoin data from 2014 to 2019.  
-** Strategies Tested**:  
+**Data Source**: 1-minute Bitcoin data from 2014 to 2019.  
+**Strategies Tested**:  
 - SMA Crossover
 - Mean Reversion
   
-** Key Insights**: While some strategy runs did outperform the buy and hold method, after incorporating fees, the majority of runs using random parameters did not. However, SMA Crossover seems to be a more favorable strategy for Bitcoin trading than Mean Reversion.  
+**Key Insights**: While some strategy runs did outperform the buy and hold method, after incorporating fees, the majority of runs using random parameters did not. However, SMA Crossover seems to be a more favorable strategy for Bitcoin trading than Mean Reversion.  
 Detailed Analysis & Code
 
 ### 3. Consumer Satisfaction (ACSI Score Analysis for Investment Strategies)
