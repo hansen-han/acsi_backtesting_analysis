@@ -17,9 +17,9 @@ This is not to say that Mean Reversion and/or SMA Crossover strategies cannot ou
 Regardless of whether either beats buy and hold, it seems that SMA Crossover seems to be a better pick than Mean Reversion for BTC trading. 
 
 
-![plot](/images/jun_13_boxplots.png)
+![plot](./images/jun_13_boxplots.png)
 
-![plot](/images/jun_13_barplots.png)
+![plot](./images/jun_13_barplots.png)
 
 ## Limitations
 It is important to note that there are gaps in the price data. 
