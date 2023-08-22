@@ -5,7 +5,8 @@ This repository hosts a collection of analyses exploring different trading strat
 ### 1. Stocks
 This section is focused on understanding whether trend following and/or mean reversion strategies outperform the buy and hold strategy, particularly with the S&P 500.
 
-Data Source: Hourly data for the past two years obtained using the yfinance library.
+**Data Source**: Hourly data for the past two years obtained using the yfinance library.  
+
 **Strategies Tested**:
 - Mean Reversion w/ Shorting
 - Mean Reversion w/o Shorting
@@ -19,6 +20,7 @@ Detailed Analysis & Code
 A deep dive into trend following and mean reversion strategies to understand their effectiveness in trading Bitcoin.
 
 **Data Source**: 1-minute Bitcoin data from 2014 to 2019.  
+
 **Strategies Tested**:  
 - SMA Crossover
 - Mean Reversion
@@ -30,7 +32,9 @@ Detailed Analysis & Code
 This section evaluates whether high ACSI scores can be predictive of superior stock market returns.
 
 **Data Source**: Consumer satisfaction scores from 1996 to 2021 for various companies, obtained from the ACSI website.  
-**Companies Analyzed** : Out of 564 companies with ACSI scores, 318 were publicly traded, represented by 235 unique tickers.  
+
+**Companies Analyzed** : Out of 564 companies with ACSI scores, 318 were publicly traded, represented by 235 unique tickers.
+
 **Key Insights**: The analysis seeks to determine any correlation between a company's ACSI scores and its stock market performance.  
 Detailed Analysis & Code
 
