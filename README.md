@@ -37,10 +37,3 @@ This section evaluates whether high ACSI scores can be predictive of superior st
 
 **Key Insights**: The analysis seeks to determine any correlation between a company's ACSI scores and its stock market performance.  
 Detailed Analysis & Code
-
-## Future Directions:
-- Extend datasets to cover a more extended period for enhanced validity.
-- Incorporate feedback and improvements to refine trading strategies.
-  
-## Contributions:
-Feel free to fork the repository, submit pull requests, or open an issue to discuss potential changes or improvements.
