@@ -1,0 +1,4 @@
+...1,ma_length,stop_loss,buy_threshold,take_profit,cumulative_return,cumulative_baseline_return,profitable_quarters,total_trades,quarters_beating_baseline_results,strategy_quarterly_stdev,baseline_quarterly_stdev,strategy,shorting,ma1_length,ma2_length,run_type,greater_than_threshold
+11,NA,NA,NA,NA,50.20331731676509,32.248566172492154,21,66,0.28,0.5381823319108086,0.6436151499452962,SMA Crossover,TRUE,378,957,SMA Crossover_Shorting,1
+16,NA,NA,NA,NA,39.7071802362312,32.248566172492154,21,93,0.39,0.431081641031045,0.6436151499452962,SMA Crossover,TRUE,276,746,SMA Crossover_Shorting,1
+53,NA,NA,NA,NA,39.470581824544134,32.248566172492154,20,66,0.33,0.5399773380336956,0.6436151499452962,SMA Crossover,TRUE,359,980,SMA Crossover_Shorting,1
