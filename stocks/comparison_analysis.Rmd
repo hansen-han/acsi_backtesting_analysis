@@ -15,19 +15,19 @@ library(magrittr)
 
 ## Load Data
 ```{r}
-df1 <- read_csv("run_output/mean_reversion_no_shorting_100_runs.csv")
+df1 <- read_csv("run_output/mean_reversion_no_shorting_2023-08-22.csv")
 df1$strategy <- "Mean Reversion"
 df1$shorting <- FALSE
 
-df2 <- read_csv("run_output/mean_reversion_shorting_allowed_100_runs.csv")
+df2 <- read_csv("run_output/mean_reversion_shorting_2023-08-22.csv")
 df2$strategy <- "Mean Reversion"
 df2$shorting <- TRUE
 
-df3 <- read_csv("run_output/sma_crossover_no_shorting_100_runs.csv")
+df3 <- read_csv("run_output/simple_moving_average_crossover_no_shorting_2023-08-22.csv")
 df3$strategy <- "SMA Crossover"
 df3$shorting <- FALSE
 
-df4 <- read_csv("run_output/sma_crossover_shorting_allowed_100_runs.csv")
+df4 <- read_csv("run_output/simple_moving_average_crossover_shorting_2023-08-22.csv")
 df4$strategy <- "SMA Crossover"
 df4$shorting <- TRUE
 
@@ -47,10 +47,22 @@ all_data %<>% mutate(shorting_label = case_when(
 
 Drop columns w/o data
 ```{r}
-all_data %<>% select(-`...1`, -profitable_quarters, -total_trades)
+all_data %<>% select(-`...1`)
 ```
 
 ## Analysis
+
+### How many strategies beat baseline (buy and hold)?
+281 / 400
+```{r}
+all_data %>% filter(cumulative_return > cumulative_baseline_return)
+```
+
+### Are there any strategies that beat buy and hold, have less variation, and consistently win?
+```{r}
+all_data %>% filter(cumulative_return > cumulative_baseline_return) %>% filter(strategy_quarterly_stdev < baseline_quarterly_stdev) %>% filter(quarters_beating_baseline_results > 0.5) %>% arrange(desc(cumulative_return)) 
+```
+
 
 
 ### How do the different strategies compare?
