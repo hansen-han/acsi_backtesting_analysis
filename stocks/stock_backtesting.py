@@ -5,7 +5,10 @@ import warnings
 import pandas as pd
 import yfinance as yf
 from datetime import datetime, timedelta
-
+import random
+import statistics 
+import numpy as np
+from concurrent.futures import ProcessPoolExecutor
 
 def get_stock_data(ticker):
     # Get today's date
@@ -855,3 +858,148 @@ def mean_reversion_backtester(sampled_data,
     }
     
     return backtest_results
+
+def random_ma_length_generator():
+    """
+    Generate random moving averages for optimization purposes.
+    """
+    import random
+    num1 = random.randrange(0, round(2191/2))
+    num2 = random.randrange(0, round(2191/2))
+    while num2 < num1:
+        num2 = random.randrange(0, round(2191/2))
+    
+    return num1, num2
+
+def run_single_backtest_mean_reversion(x, stock_df, shorting_allowed, fixed_fee):
+    stop_loss = round(random.randrange(0, 100),2)/100
+    buy_threshold = round(random.randrange(0, 100),2)/100
+    take_profit = round(random.randrange(0, 100),2)/100
+    ma_length = random.randrange(0, round(2191/2))
+
+    backtest_results = mean_reversion_backtester(
+                sampled_data = stock_df,
+                order_sizing = 1,
+                ma_length = ma_length,
+                buy_threshold = buy_threshold,
+                take_profit = take_profit, 
+                stop_loss = stop_loss,
+                starting_capital = 10000,
+                shorting_allowed=shorting_allowed,
+                fixed_fee=fixed_fee,
+                record_balance=False,
+                fee = 0,
+                display_results = False,
+                show_moving_averages = False,
+                annual_taxes = True,
+                tax_percentage = 0.3
+            )
+    
+    # Extract and return relevant results
+    return (stop_loss, buy_threshold, take_profit, ma_length, backtest_results)
+
+def run_single_backtest_sma_crossover(x, stock_df, shorting_allowed, fixed_fee):
+    ma1_length, ma2_length = random_ma_length_generator()
+
+    backtest_results = sma_crossover_backtester(
+        sampled_data=stock_df,
+        order_sizing=1,
+        ma1_length=ma1_length,
+        ma2_length=ma2_length,
+        starting_capital=10000,
+        display_results=False,
+        shorting_allowed=shorting_allowed,
+        fixed_fee=fixed_fee,
+        record_balance=True,
+        show_moving_averages=False,
+        annual_taxes=True,
+        tax_percentage=0.3,
+        fee=0
+    )
+    
+    # Extract and return relevant results
+    return (ma1_length, ma2_length, backtest_results)
+
+def run_multiple_backtests(shorting_allowed, num_runs, fixed_fee, stock_df, strategy):
+
+    if strategy == "mean reversion":
+        with ProcessPoolExecutor() as executor:
+            results = list(executor.map(run_single_backtest_mean_reversion, range(num_runs), [stock_df] * num_runs, [shorting_allowed] * num_runs, [fixed_fee] * num_runs))
+        
+        
+        # compile results into a table for exploration
+        result_dict = {
+            "ma_length": [],
+            "stop_loss": [],
+            "buy_threshold": [],
+            "take_profit": [],
+            "cumulative_return": [],
+            "cumulative_baseline_return": [],
+            "profitable_quarters": [],
+            "total_trades": [],
+            "quarters_beating_baseline_results": [],
+            "strategy_quarterly_stdev": [],
+            "baseline_quarterly_stdev": []
+        }
+
+
+        for res in results:
+            stop_loss, buy_threshold, take_profit, ma_length, backtest_results = res
+
+            result_dict['ma_length'].append(ma_length)
+            result_dict['stop_loss'].append(stop_loss)
+            result_dict['buy_threshold'].append(buy_threshold)
+            result_dict['take_profit'].append(take_profit)
+            result_dict['cumulative_return'].append(backtest_results['final_return_rate'])
+            result_dict['cumulative_baseline_return'].append(backtest_results['baseline_return_rate'])
+            result_dict['profitable_quarters'].append(len([x for x in backtest_results['quarter_return_rates'] if x > 0]))
+            result_dict['total_trades'].append(sum([x for x in backtest_results['quarter_trades']]))
+            result_dict['quarters_beating_baseline_results'].append(backtest_results['quarters_beating_baseline'])
+            result_dict['strategy_quarterly_stdev'].append(backtest_results['strategy_quarterly_stdev'])
+            result_dict['baseline_quarterly_stdev'].append(backtest_results['baseline_quarterly_stdev'])
+
+
+        optimization_results = pd.DataFrame(result_dict)
+
+    elif strategy == "simple moving average crossover":
+
+        with ProcessPoolExecutor() as executor:
+            results = list(executor.map(run_single_backtest_sma_crossover, range(num_runs), [stock_df] * num_runs, [shorting_allowed] * num_runs, [fixed_fee] * num_runs))
+        
+        
+        # compile results into a table for exploration
+        
+        result_dict = {
+            "ma1_length": [],
+            "ma2_length": [],
+            "cumulative_return": [],
+            "cumulative_baseline_return": [],
+            "profitable_quarters": [],
+            "total_trades": [],
+            "quarters_beating_baseline_results": [],
+            "strategy_quarterly_stdev": [],
+            "baseline_quarterly_stdev": []
+        }
+
+
+        for res in results:
+            ma1_length, ma2_length, backtest_results = res
+
+            result_dict['ma1_length'].append(ma1_length)
+            result_dict['ma2_length'].append(ma2_length)
+            result_dict['cumulative_return'].append(backtest_results['final_return_rate'])
+            result_dict['cumulative_baseline_return'].append(backtest_results['baseline_return_rate'])
+            result_dict['profitable_quarters'].append(len([x for x in backtest_results['quarter_return_rates'] if x > 0]))
+            result_dict['total_trades'].append(sum([x for x in backtest_results['quarter_trades']]))
+            result_dict['quarters_beating_baseline_results'].append(backtest_results['quarters_beating_baseline'])
+            result_dict['strategy_quarterly_stdev'].append(backtest_results['strategy_quarterly_stdev'])
+            result_dict['baseline_quarterly_stdev'].append(backtest_results['baseline_quarterly_stdev'])
+
+
+        optimization_results = pd.DataFrame(result_dict)
+    else:
+        raise Exception("Error:", strategy, "is not valid, please select either 'simple moving average' or 'mean reversion'.")
+
+        
+        
+    return optimization_results
