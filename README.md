@@ -2,6 +2,7 @@
 
 This repository contains the datasets, code, and analysis to replicate the research conducted on the use of American Customer Satisfaction Index (ACCSI) scores in investment strategies. This research explores the hypothesis of whether high ACSI scores can predict superior stock market returns.
 
+![Screenshot of the application](screenshot_figure.png)
 
 ## Repository Contents
 Below is a brief explanation of the contents in this repository:
